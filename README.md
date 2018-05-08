@@ -103,3 +103,20 @@ qcloudapi-sdk-python是为了让Python开发者能够在自己的代码里更快
     except Exception as e:
         import traceback
         print('traceback.format_exc():\n%s' % traceback.format_exc())
+
+#### 其他帮助
+
+##### 如何调用 SDK 目前不支持的模块 API
+
+如果在使用过程中，发现需要调用的腾讯云产品 API 还没有被当前 SDK 版本支持，你可以通过调用特殊函数 `register_module` 来动态注册新模块，完成调用。
+
+```python
+# 一个注册 dcdb 模块的示例
+from QcloudApi.modules import register_module
+
+
+register_module("dcdb", host="dcdb.tencentcloudapi.com", path="/")
+
+service = QcloudApi("dcdb", {... ...})
+service.call(... ...)
+```

@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+from .modules import find_module_by_name
 
 
 class QcloudApi(object):
@@ -8,6 +9,11 @@ class QcloudApi(object):
         self.config = config
 
     def _factory(self, module, config):
+        # Try to find a dynamic module first
+        dynamic_module = find_module_by_name(module)
+        if dynamic_module:
+            return dynamic_module(config)
+
         if (module == 'cdb'):
             from .modules.cdb import Cdb
             service = Cdb(config)
