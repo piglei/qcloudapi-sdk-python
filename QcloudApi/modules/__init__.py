@@ -7,9 +7,9 @@ _GLOBAL_MODULES = {}
 def register_module(name, host, path):
     """Register a new module to current modules
 
-    :param name string: module name
-    :param host string: request host
-    :param path string: request path
+    :param name: module name, such as "dcdb"
+    :param host: request host
+    :param path: request path
     """
     mclass = type("DynamicModule_%s" % name, (Base, ), {
         "requestHost": host,
@@ -21,10 +21,9 @@ def register_module(name, host, path):
 def find_module_by_name(name):
     """Find a dynamic module by given module name
 
-    :param name string: module name
+    :param name: module name
     :returns: a DynamicModule class or None if no module named `name` is found
     """
-    print(_GLOBAL_MODULES)
     return _GLOBAL_MODULES.get(name, None)
 
 
